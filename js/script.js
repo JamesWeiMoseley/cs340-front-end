@@ -32,6 +32,8 @@ btn.addEventListener("click", () => {
     cell6.innerHTML = orderLocation;
     cell7.innerHTML = orderType;
     cell8.innerHTML = totalPrice;
+    cell9.innerHTML = `<a href="#edit-cook-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+  <a href="#deleteEmployeeModal" id='delete' class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>`;
 })
 
 $(document).ready(function(){
