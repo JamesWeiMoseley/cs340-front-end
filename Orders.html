@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="btn-container">
+
+    <!-- <button id="submit_button" type="submit"> Hello</button>
+    <table id='myTable'>
+      <tr id="items">
+        <td>first item</td>
+        <td>sec item</td>
+      </tr>
+    </table> -->
+
+    <a href="index.html" class="btn"> <i class="fa fa-home"> Home </i></a>
+      <h1 class="home-text">Orders</h1>
+  </div>
+  <div class="add">
+    <div class="input-child">
+      <form action="submission.html" method="POST">
+        
+        <h3>Add Order</h3>
+        <section class="customerID-selection">
+          <label for="customerID">Customer ID:</label>
+          <input type="text" id="customerID" name="customerID">
+        </section>
+        <section class="employeeID-selection">
+          <label for="employeeID">Employee ID:</label>
+          <input type="text" id="employeeID" name="employeeID">
+        </section>
+
+        <section class="cookID-selection">
+          <label for="cookID">Cook ID:</label>
+          <input type="text" id="cookID" name="cookID">
+        </section>
+        <section class="itemID-selection">
+          <label for="itemID">Item ID:</label>
+          <input type="text" id="itemID" name="itemID">
+        </section>
+        <section class="date-selection">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date">
+        </section>
+        <section class="orderLocation-selection">
+          <label for="orderLocation">Order Location:</label>
+          <select name="orderLocation" id="orderLocation">
+            <option value="in-store">In-store</option>
+            <option value="online">Online</option>
+          </select>
+        </section>
+        <section class="orderType-selection">
+          <label for="orderType">Order Type:</label>
+          <select name="orderType" id="orderType">
+            <option value="pickup">Pickup</option>
+            <option value="delivery">Delivery</option>
+          </select>
+        </section>
+
+        <section class="totalPrice-selection">
+          <label for="totalPrice">Total Price:</label>
+          <input type="number" step="0.01" name="totalPrice" id="totalPrice" min=0>
+        </section>
+
+
+        <section class="submission">
+          <button type="button" id="submit_button" class="btn-success btn-lg btn-block">Add</button>
+        </section>
+      </form>
+    </section>
+    </div>
+    </div>
+    <div class="container">
+      
+    <div class="table-child">
+      <h2>Search/Filter</h2>
+      <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      <br>
+    
+      <table>
+        <thead>
+          <tr>
+            <th>Customer ID</th>
+            <th>Employee ID</th>
+            <th>Cook ID</th>
+            <th>Item ID</th>
+            <th>Date</th>
+            <th>Order Location</th>
+            <th>Order Type</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          <tr>
+            <td>SpId6D</td>
+            <td>tyBAGm</td>
+            <td>9M3nTC</td>
+            <td>MCKzSn</td>
+            <td>2008-11-11</td>
+            <td>In-store</td>
+            <td>Pickup</td>
+            <td>43.45</td>
+            <td>
+                <a href="#edit-order-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>RVO4BZ</td>
+            <td>maoJDd</td>
+            <td>Nenp9H</td>
+            <td>aJCZ3A</td>
+            <td>2008-10-10</td>
+            <td>Online</td>
+            <td>Delivery</td>
+            <td>50.00</td>
+            <td>
+                <a href="#edit-order-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+	<div id="edit-order-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">
+						<h4 class="modal-title">Edit Order</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+              <section class="customerID-selection">
+                <label for="customerID">Customer ID:</label>
+                <input type="text" id="customerID" name="customerID">
+              </section>
+              <section class="employeeID-selection">
+                <label for="employeeID">Employee ID:</label>
+                <input type="text" id="employeeID" name="employeeID">
+              </section>
+
+              <section class="cookID-selection">
+                <label for="cookID">Cook ID:</label>
+                <input type="text" id="cookID" name="cookID">
+              </section>
+              <section class="itemID-selection">
+                <label for="itemID">Item ID:</label>
+                <input type="text" id="itemID" name="itemID">
+              </section>
+              <section class="date-selection">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+              </section>
+              <section class="orderLocation-selection">
+                <label for="orderLocation">Order Location:</label>
+                <select name="orderLocation" id="orderLocation">
+                  <option value="in-store">In-store</option>
+                  <option value="online">Online</option>
+                </select>
+              </section>
+              <section class="orderType-selection">
+                <label for="orderType">Order Type:</label>
+                <select name="orderType" id="orderType">
+                  <option value="in-store">Pickup</option>
+                  <option value="online">Delivery</option>
+                </select>
+              </section>
+
+              <section class="totalPrice-selection">
+                <label for="totalPrice">Total Price:</label>
+                <input type="number" step="0.01" name="totalPrice" id="totalPrice" min=0>
+              </section>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-info" value="Save">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+  <script src="./js/script.js">
+  </script>
+</body>
+</html>
