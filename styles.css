@@ -19,11 +19,14 @@ table, th, td {
   /* align-content: center; */
 }
 
+/* container for add box */
 .input-child {
-    border: 1px solid rgba(165, 166, 179, 0.427);
+    border: 1px solid rgba(95, 95, 104, 0.427);
     padding: 1rem;
     background-color: #fff;
-    display: inline-block;
+    width: 50%;
+    min-width: 200px;
+    border-radius: 6px;
 }
 
 
@@ -34,7 +37,7 @@ table, th, td {
 }
 
 body {
-  background-color: rgba(232, 238, 238, 0.735);
+  background-color: rgba(187, 210, 210, 0.735);
 }
 
 .front-page {
@@ -55,6 +58,7 @@ body {
 .home-text {
   font-size: 3rem;
   text-align: center;
+  text-shadow: 2px 2px 5px #0e154b;
 }
 
 .first-container {
@@ -77,4 +81,16 @@ body {
   padding: 3rem;
   width: 90%;
   margin: auto;
+}
+
+.spacing {
+  padding: 6px;
+}
+
+.display_table {
+  width: 100%;
+}
+
+.delete-row-btn {
+  cursor: pointer;
 }

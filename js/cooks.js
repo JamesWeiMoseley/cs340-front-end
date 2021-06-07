@@ -1,57 +1,86 @@
 var table = document.getElementById('myTable');
 let btn = document.getElementById("submit_button");
-let del = document.getElementById("delete");
+let del = document.getElementById("delete_button");
+let edit = document.getElementById("edit_button");
+let server = 'http://localhost:9022/select/cooks';
+let putServer = 'http://localhost:9022/cooks';
+let deleteServer = 'http://localhost:9022/delete/cooks/';
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   fetch('http://flip3.engr.oregonstate.edu:9022/orders', 'cooks')
-//   .then(response => response.json())
-//   .then(data => loadHTMLTable(data['firstName, lastName, username, email']));
-// })
+// populate the table 
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("client is loaded");
+  axios.get(server)
+  // .then(response => response.json())
+  .then(data => loadHTMLTable(data['data']))
+})
 
 function loadHTMLTable(data) {
-  const table = document.querySelector('table tbody');
-
   let words = "";
 
-  data.forEach( ({firstName, lastName, username, email}) => {
+  data.forEach( ({cookID, firstName, lastName, username, email}) => {
     words += '<tr>';
+    words += `<td>${cookID}</td>`;
     words += `<td>${firstName}</td>`;
+    words += `<td>${lastName}</td>`;
+    words += `<td>${username}</td>`;
+    words += `<td>${email}</td>`;
+    words += `<td><a href="#edit-cook-modal" id=${cookID} class="edit" data-toggle="modal">&#9999;</a>
+    <a class="delete-row-btn" id=${cookID} data-toggle="tooltip" title="Delete">&#128465;</td>`;
+    words += "</tr>"
   });
 
+  // console.log(data[0].firstName);
   table.innerHTML = words;
 }
 
+// --------- add features ------------------
 function addButton() {
-  let firstName = document.getElementById('firstName').value;
-  let lastName = document.getElementById('lastName').value;
-  let username = document.getElementById('username').value;
-  let email = document.getElementById('email').value;
+  let first = document.getElementById('firstName').value;
+  let last = document.getElementById('lastName').value;
+  let user = document.getElementById('username').value;
+  let e = document.getElementById('email').value;
 
-  var row = table.insertRow(0);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-  var cell6 = row.insertCell(5);
+  axios.post(putServer, {firstName: first, lastName : last, username : user, email : e });
 
-  cell2.innerHTML = firstName;
-  cell3.innerHTML = lastName;
-  cell4.innerHTML = username;
-  cell5.innerHTML = email;
-  cell6.innerHTML = `<a href="#edit-cook-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-  <a href="#deleteEmployeeModal" id='delete' class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>`;
+  location.reload();
 }
-
 
 btn.addEventListener("click", () => {
     addButton();
 })
 
-del.addEventListener("click", () => {
-  console.log('hello');
+// --------- delete and edit features ------------------
+document.querySelector('table tbody').addEventListener('click', function(e) {
+  if(e.target.className === 'delete-row-btn') {
+    let target_id = e.target.id;
+    deleteRow(target_id);
+  } else {
+    let edit_id = e.target.id;
+    console.log(edit_id);
+    edit.addEventListener("click", () => {
+      let edit_first = document.getElementById("edit_first").value;
+      let edit_last = document.getElementById("edit_last").value;
+      let edit_email = document.getElementById("edit_email").value;
+      let edit_username = document.getElementById("edit_username").value;
+      console.log(edit_first);
+
+      editRow(edit_id, edit_first, edit_last, edit_email, edit_username);
+      // event.preventDefault();
+    })
+  }
 })
 
+function deleteRow (target_id) {
+  axios.get(deleteServer + target_id);
+  location.reload();
+}
+
+function editRow (edit_id, firstName, lastName, username, email) {
+  axios.put(putServer, ({firstName: firstName, lastName: lastName, email: email, username: username, cookID: edit_id}));
+}
+
+
+// jquery for search 
 $(document).ready(function(){
     $("#myInput").on("keyup", function() {
       var value = $(this).val().toLowerCase();
@@ -60,3 +89,10 @@ $(document).ready(function(){
       });
     });
   });
+
+// jquery for tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+  

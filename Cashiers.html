@@ -19,22 +19,22 @@
   <div class="add">
     <div class="input-child">
       <form action="submission.html" method="POST">
-
+        <!-- Add Cashier Box  -->
         <h3>Add Cashier</h3>
-        <section class="firstName-selection">
+        <section class="firstName-selection spacing">
           <label for="firstName">First Name:</label>
           <input type="text" id="firstName" name="firstName">
         </section>
-        <section class="lastName-selection">
+        <section class="lastName-selection spacing">
           <label for="lastName">Last Name:</label>
           <input type="text" id="lastName" name="lastName">
         </section>
-        <section class="username-selection">
+        <section class="username-selection spacing">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username">
         </section>
-        <section class="email-selection">
-          <label for="email">Email:</label>
+        <section class="email-selection spacing">
+          <label for="email">Email Add:</label>
           <input type="text" id="email" name="email">
         </section>
 
@@ -45,12 +45,13 @@
     </section>
     </div>
     </div>
+    <!-- Search Bar and Table  -->
     <div class="container">
     <div class="table-child">
       <h2>Search/Filter</h2>
       <input class="form-control" id="myInput" type="text" placeholder="Search..">
       <br>
-      <table>
+      <table id="table" class="display_table">
         <thead>
           <tr>
             <th>cashierID</th>
@@ -60,75 +61,42 @@
             <th>email</th>
           </tr>
         </thead>
-        <tbody id="myTable">
-          <tr>
-            <td>SpId6D</td>
-            <td>Jesse</td>
-            <td>Narkmanee</td>
-            <td>React_dev888</td>
-            <td>helloworld@gmail.com</td>
-            <td>
-                <a href="#edit-cashier-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteCashierModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>0cXvJs</td>
-            <td>James</td>
-            <td>Moseley</td>
-            <td>Java_dev888</td>
-            <td>givemeajob@gmail.com</td>
-            <td>
-                <a href="#edit-cashier-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteCashierModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>0Y85k6</td>
-            <td>Cyrus</td>
-            <td>Wu</td>
-            <td>Cyroman</td>
-            <td>logistics.Marendo@gmail.com</td>
-            <td>
-                <a href="#edit-cashier-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteCashierModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-            </td>
-          </tr>
+        <tbody id="myTable">          
         </tbody>
       </table>
     </div>
   </div>
-
+  <!-- edit Model pop up  -->
 	<div id="edit-cashier-modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">
 						<h4 class="modal-title">Edit Cashier</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true"></button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
               <section class="firstName-selection">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName">
+                <input type="text" id="edit_first" name="firstName">
               </section>
               <section class="lastName-selection">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName">
+                <input type="text" id="edit_last" name="lastName">
               </section>
               <section class="username-selection">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="edit_username" name="username">
               </section>
               <section class="email-selection">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="edit_email" name="email">
               </section>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Save">
+						<input type="submit" class="btn btn-info" value="Save" id="edit_button">
 					</div>
 				</form>
 			</div>
@@ -141,7 +109,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
-  <script src='./js/employees.js'>
-  </script>
+  <script src='./js/employees.js'></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>

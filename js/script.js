@@ -1,41 +1,98 @@
 var table = document.getElementById('myTable');
 let btn = document.getElementById("submit_button");
+let del = document.getElementById("delete_button");
+let edit = document.getElementById("edit_button");
+let server = 'http://localhost:9022/select/orders';
+let putServer = 'http://localhost:9022/orders';
+let deleteServer = 'http://localhost:9022/delete/orders/';
 
-
-
-btn.addEventListener("click", () => {
-    let customerID = document.getElementById('customerID').value;
-    let employeeID = document.getElementById('employeeID').value;
-    let cookID = document.getElementById('cookID').value;
-    let itemID = document.getElementById('itemID').value;
-    let date = document.getElementById('date').value;
-    let orderLocation = document.getElementById('orderLocation').value;
-    let orderType = document.getElementById('orderType').value;
-    let totalPrice = document.getElementById('totalPrice').value;
-
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(5);
-    var cell7 = row.insertCell(6);
-    var cell8 = row.insertCell(7);
-    var cell9 = row.insertCell(8);
-    
-    cell1.innerHTML = customerID;
-    cell2.innerHTML = employeeID;
-    cell3.innerHTML = cookID;
-    cell4.innerHTML = itemID;
-    cell5.innerHTML = date;
-    cell6.innerHTML = orderLocation;
-    cell7.innerHTML = orderType;
-    cell8.innerHTML = totalPrice;
-    cell9.innerHTML = `<a href="#edit-cook-modal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-  <a href="#deleteEmployeeModal" id='delete' class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>`;
+// populate the table 
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("client is loaded");
+  axios.get(server)
+  // .then(response => response.json())
+  .then(data => loadHTMLTable(data['data']))
 })
 
+function loadHTMLTable(data) {
+  let words = "";
+
+  data.forEach( ({orderID, customerID, cashierID, cookID, itemID, date, orderLocation, orderType, totalPrice}) => {
+    words += '<tr>';
+    words += `<td>${orderID}</td>`;
+    words += `<td>${customerID}</td>`;
+    words += `<td>${cashierID}</td>`;
+    words += `<td>${cookID}</td>`;
+    words += `<td>${itemID}</td>`;
+    words += `<td>${date}</td>`;
+    words += `<td>${orderLocation}</td>`;
+    words += `<td>${orderType}</td>`;
+    words += `<td>${totalPrice}</td>`;
+    words += `<td><a href="#edit-order-modal" id=${orderID} class="edit" data-toggle="modal">&#9999;</a>
+    <a class="delete-row-btn" id=${orderID} data-toggle="tooltip" title="Delete">&#128465;</td>`;
+    words += "</tr>"
+  });
+
+  // console.log(data[0].firstName);
+  table.innerHTML = words;
+}
+
+// --------- add features ------------------
+function addButton() {
+  let customerID = document.getElementById('customerID').value;
+  let cashierID = document.getElementById('employeeID').value;
+  let cookID = document.getElementById('cookID').value;
+  let itemID = document.getElementById('itemID').value;
+  let date = document.getElementById('date').value;
+  let orderLocation = document.getElementById('orderLocation').value;
+  let orderType = document.getElementById('orderType').value;
+  let totalPrice = document.getElementById('totalPrice').value;
+
+  axios.post(putServer, {customerID: customerID, cashierID : cashierID, cookID : cookID, itemID : itemID,  date: date, orderLocation : orderLocation, orderType : orderType, totalPrice : totalPrice});
+
+  location.reload();
+}
+
+btn.addEventListener("click", () => {
+    addButton();
+})
+
+
+// --------- delete and edit features ------------------
+document.querySelector('table tbody').addEventListener('click', function(e) {
+  if(e.target.className === 'delete-row-btn') {
+    let target_id = e.target.id;
+    console.log(target_id);
+    deleteRow(target_id);
+  } else {
+    let edit_id = e.target.id;
+    console.log(edit_id);
+    edit.addEventListener("click", () => {
+      let customerID = document.getElementById('edit_customerID').value;
+      let cashierID = document.getElementById('edit_employeeID').value;
+      let cookID = document.getElementById('edit_cookID').value;
+      let itemID = document.getElementById('edit_itemID').value;
+      let date = document.getElementById('edit_date').value;
+      let orderLocation = document.getElementById('edit_orderLocation').value;
+      let orderType = document.getElementById('edit_orderType').value;
+      let totalPrice = document.getElementById('edit_totalPrice').value;
+
+      axios.put(putServer, ({ 
+        orderID : edit_id, customerID:customerID, cashierID:cashierID, cookID:cookID, itemID:itemID, date:date, orderLocation:orderLocation, orderType:orderType, totalPrice:totalPrice 
+      }));
+
+    })
+  }
+})
+
+function deleteRow (target_id) {
+  axios.get(deleteServer + target_id);
+  location.reload();
+}
+
+
+
+// jquery for search 
 $(document).ready(function(){
     $("#myInput").on("keyup", function() {
       var value = $(this).val().toLowerCase();
@@ -44,3 +101,10 @@ $(document).ready(function(){
       });
     });
   });
+
+// jquery for tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+  
