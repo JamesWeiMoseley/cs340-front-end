@@ -38,10 +38,13 @@ function addButton() {
   let last = document.getElementById('lastName').value;
   let user = document.getElementById('username').value;
   let e = document.getElementById('email').value;
+  console.log("adding");
+  axios.post(putServer, {
+    firstName: first, lastName : last, username : user, email : e 
+  }).then(() => {
+    location.reload();
+  });
 
-  axios.post(putServer, {firstName: first, lastName : last, username : user, email : e });
-
-  location.reload();
 }
 
 btn.addEventListener("click", () => {
@@ -64,7 +67,9 @@ document.querySelector('table tbody').addEventListener('click', function(e) {
       console.log(edit_first);
 
       editRow(edit_id, edit_first, edit_last, edit_email, edit_username);
-      // event.preventDefault();
+      // we need to prevent the default action because the flip server is too slow
+      // therefore we need to use a async function rather than let the modal do its thing
+      event.preventDefault();
     })
   }
 })
@@ -74,8 +79,13 @@ function deleteRow (target_id) {
   location.reload();
 }
 
-function editRow (edit_id, firstName, lastName, username, email) {
-  axios.put(putServer, ({firstName: firstName, lastName: lastName, email: email, username: username, cashierID: edit_id}));
+// edit row is async because we need to make sure the put is performed in time
+async function editRow (edit_id, firstName, lastName, username, email) {
+  axios.put(putServer, (
+    {firstName: firstName, lastName: lastName, email: email, username: username, cashierID: edit_id}
+    )).then(() => {
+      location.reload();
+    });
 }
 
 // jquery for search 

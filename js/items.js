@@ -39,9 +39,12 @@ function addButton() {
   let unitPrice = document.getElementById('unitPrice').value;
   let itemCategory = document.getElementById('itemCategory').value;
 
-  axios.post(putServer, {name: name, quantity : quantity, unitPrice : unitPrice, itemCategory : itemCategory });
+  axios.post(putServer, {
+    name: name, quantity : quantity, unitPrice : unitPrice, itemCategory : itemCategory 
+  }).then(() => {
+    location.reload();
+  });
 
-  location.reload();
 }
 
 btn.addEventListener("click", () => {
@@ -63,7 +66,7 @@ document.querySelector('table tbody').addEventListener('click', function(e) {
       let edit_itemCategory = document.getElementById("edit_itemCategory").value;
 
       editRow(edit_id, edit_name, edit_quantity, edit_unitPrice, edit_itemCategory);
-      // event.preventDefault();
+      event.preventDefault();
     })
   }
 })
@@ -73,8 +76,12 @@ function deleteRow (target_id) {
   location.reload();
 }
 
-function editRow (edit_id, name, quantity, unitPrice, itemCategory) {
-  axios.put(putServer, ({name: name, quantity: quantity, unitPrice: unitPrice, itemCategory: itemCategory, itemID: edit_id}));
+async function editRow (edit_id, name, quantity, unitPrice, itemCategory) {
+  axios.put(putServer, ({
+    name: name, quantity: quantity, unitPrice: unitPrice, itemCategory: itemCategory, itemID: edit_id
+  })).then(() => {
+    location.reload();
+  });
 }
 
 

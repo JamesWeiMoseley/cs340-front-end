@@ -40,9 +40,11 @@ function addButton() {
   let user = document.getElementById('username').value;
   let e = document.getElementById('email').value;
 
-  axios.post(putServer, {firstName: first, lastName : last, username : user, email : e });
-
-  location.reload();
+  axios.post(putServer, {
+    firstName: first, lastName : last, username : user, email : e 
+  }).then(() => {
+    location.reload();
+  });
 }
 
 btn.addEventListener("click", () => {
@@ -65,7 +67,7 @@ document.querySelector('table tbody').addEventListener('click', function(e) {
       console.log(edit_first);
 
       editRow(edit_id, edit_first, edit_last, edit_email, edit_username);
-      // event.preventDefault();
+      event.preventDefault();
     })
   }
 })
@@ -76,7 +78,11 @@ function deleteRow (target_id) {
 }
 
 function editRow (edit_id, firstName, lastName, username, email) {
-  axios.put(putServer, ({firstName: firstName, lastName: lastName, email: email, username: username, customerID: edit_id}));
+  axios.put(putServer, ({
+    firstName: firstName, lastName: lastName, email: email, username: username, customerID: edit_id
+  })).then(() => {
+    location.reload();
+  });
 }
 
 // jquery for search 

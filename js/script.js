@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // ---- These functions populate the select options in the add area ----
-function populateCustomer () {
+function populateCustomer (input) {
   axios.get(customerServer).then((response) => {
     response.data.forEach(({customerID}) => {
       let option = document.createElement('option');
-      let select = document.getElementById('selectCustomer');
+      let select = document.getElementById(input);
       option.innerHTML = customerID;
       option.value = customerID;
       select.appendChild(option);
@@ -31,11 +31,11 @@ function populateCustomer () {
   });
 }
 
-function populateCashier () {
+function populateCashier (input) {
   axios.get(cashierServer).then((response) => {
     response.data.forEach(({cashierID}) => {
       let option = document.createElement('option');
-      let select = document.getElementById('selectCashier');
+      let select = document.getElementById(input);
       option.innerHTML = cashierID;
       option.value = cashierID;
       select.appendChild(option);
@@ -43,11 +43,11 @@ function populateCashier () {
   });
 }
 
-function populateCooks () {
+function populateCooks (input) {
   axios.get(cookServer).then((response) => {
     response.data.forEach(({cookID}) => {
       let option = document.createElement('option');
-      let select = document.getElementById('selectCook');
+      let select = document.getElementById(input);
       option.innerHTML = cookID;
       option.value = cookID;
       select.appendChild(option);
@@ -55,11 +55,11 @@ function populateCooks () {
   });
 }
 
-function populateItems () {
+function populateItems (input) {
   axios.get(itemServer).then((response) => {
     response.data.forEach(({itemID}) => {
       let option = document.createElement('option');
-      let select = document.getElementById('selectItem');
+      let select = document.getElementById(input);
       option.innerHTML = itemID;
       option.value = itemID;
       select.appendChild(option);
@@ -70,10 +70,10 @@ function populateItems () {
 //this will populate the table 
 function loadHTMLTable(add_data) {
   let words = ""; 
-  populateCustomer(); 
-  populateCashier();
-  populateCooks();
-  populateItems();
+  populateCustomer("selectCustomer"); 
+  populateCashier("selectCashier");
+  populateCooks("selectCook");
+  populateItems("selectItem");
   //for each loop to go through 'data' which we got back from the get
   add_data.forEach( ({orderID, customerID, cashierID, cookID, itemID, date, orderLocation, orderType, totalPrice}) => {
     words += '<tr>';
@@ -107,16 +107,16 @@ function addButton() {
   //post request to send to the backend 
   axios.post(putServer, {
     customerID: customerID, cashierID : cashierID, cookID : cookID, itemID : itemID,  date: date, orderLocation : orderLocation, orderType : orderType, totalPrice : totalPrice
+  }).then(() => {
+    location.reload();
   });
   //reload page so that we can see the newly populate table 
-  location.reload();
 }
 
 // the event listener 
 btn.addEventListener("click", () => {
     addButton();
 })
-
 
 // --------- delete and edit features ------------------
 document.querySelector('table tbody').addEventListener('click', function(e) {
@@ -129,6 +129,10 @@ document.querySelector('table tbody').addEventListener('click', function(e) {
     //otherwise we know to do the edit 
     let edit_id = e.target.id;
     console.log(edit_id);
+    populateCustomer("edit_customerID"); 
+    populateCashier('edit_employeeID');
+    populateCooks('edit_cookID');
+    populateItems('edit_itemID');
     // click is when the user clicks submit
     edit.addEventListener("click", () => {
       let customerID = document.getElementById('edit_customerID').value;
@@ -143,7 +147,7 @@ document.querySelector('table tbody').addEventListener('click', function(e) {
       axios.put(putServer, ({ 
         orderID : edit_id, customerID:customerID, cashierID:cashierID, cookID:cookID, itemID:itemID, date:date, orderLocation:orderLocation, orderType:orderType, totalPrice:totalPrice 
       }));
-
+      
     })
   }
 })
