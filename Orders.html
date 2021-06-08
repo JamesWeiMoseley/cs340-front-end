@@ -13,39 +13,38 @@
 </head>
 <body>
   <div class="btn-container">
-
-    <!-- <button id="submit_button" type="submit"> Hello</button>
-    <table id='myTable'>
-      <tr id="items">
-        <td>first item</td>
-        <td>sec item</td>
-      </tr>
-    </table> -->
-
+    <!-- title -->
     <a href="index.html" class="btn"> <i class="fa fa-home"> Home </i></a>
       <h1 class="home-text">Orders</h1>
   </div>
+  <!-- Add orders section -->
   <div class="add">
     <div class="input-child">
       <form action="submission.html" method="POST">
-        
         <h3>Add Order</h3>
         <section class="customerID-selection spacing">
           <label for="customerID">Customer ID:</label>
-          <input type="text" id="customerID" name="customerID">
+            <select name="customerID" id="selectCustomer">
+              <option value="">Select Customer</option>
+            </select>
         </section>
         <section class="employeeID-selection spacing">
-          <label for="employeeID">Employee ID:</label>
-          <input type="text" id="employeeID" name="employeeID">
+          <label for="employeeID">Cashier ID:</label>
+            <select name="employeeID" id="selectCashier">
+              <option value="">Select Cashier</option>
+            </select>
         </section>
-
         <section class="cookID-selection spacing">
           <label for="cookID">Cook ID:</label>
-          <input type="text" id="cookID" name="cookID">
+          <select name="coodID" id="selectCook">
+            <option value="">Select Cook</option>
+          </select>
         </section>
         <section class="itemID-selection spacing">
           <label for="itemID">Item ID:</label>
-          <input type="text" id="itemID" name="itemID">
+          <select name="itemID" id="selectItem">
+            <option value="">Select Item</option>
+          </select>
         </section>
         <section class="date-selection spacing">
           <label for="date">Date:</label>
@@ -65,13 +64,11 @@
             <option value="delivery">Delivery</option>
           </select>
         </section>
-
         <section class="totalPrice-selection spacing">
           <label for="totalPrice">Total Price:</label>
           <input type="number" step="0.01" name="totalPrice" id="totalPrice" min=0>
         </section>
-
-
+        <!-- Add Button -->
         <section class="submission">
           <button type="button" id="submit_button" class="btn-success btn-lg btn-block">Add</button>
         </section>
@@ -79,35 +76,34 @@
     </section>
     </div>
     </div>
+    <!-- Search Bar -->
     <div class="container">
-      
-    <div class="table-child">
-      <h2>Search/Filter</h2>
-      <input class="form-control" id="myInput" type="text" placeholder="Search..">
-      <br>
-    
-      <table id="table" class="display_table">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Customer ID</th>
-            <th>Employee ID</th>
-            <th>Cook ID</th>
-            <th>Item ID</th>
-            <th>Date</th>
-            <th>Order Location</th>
-            <th>Order Type</th>
-            <th>Total Price</th>
-          </tr>
-        </thead>
-        <tbody id="myTable">
-          
-        </tbody>
-      </table>
-    </div>
+      <div class="table-child">
+        <h2>Search/Filter</h2>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <!-- Table that will display all the info -->
+        <table id="table" class="display_table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer ID</th>
+              <th>Employee ID</th>
+              <th>Cook ID</th>
+              <th>Item ID</th>
+              <th>Date</th>
+              <th>Order Location</th>
+              <th>Order Type</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <!-- table body -->
+          <tbody id="myTable">
+          </tbody>
+        </table>
+      </div>
   </div>
-
-
+  <!-- Modal for editing orders -->
 	<div id="edit-order-modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -120,20 +116,27 @@
 						<div class="form-group">
               <section class="customerID-selection spacing">
                 <label for="customerID">Customer ID:</label>
-                <input type="text" id="edit_customerID" name="customerID">
+                <select name="customerID" id="edit_customerID">
+                  <option value="">Select Customer</option>
+                </select>
               </section>
               <section class="employeeID-selection spacing">
                 <label for="employeeID">Employee ID:</label>
-                <input type="text" id="edit_employeeID" name="employeeID">
+                <select name="employeeID" id="edit_employeeID">
+                  <option value="">Select Cashier</option>
+                </select>
               </section>
-
               <section class="cookID-selection spacing">
                 <label for="cookID">Cook ID:</label>
-                <input type="text" id="edit_cookID" name="cookID">
+                <select name="cookID" id="edit_cookID">
+                  <option value="">Select Cook</option>
+                </select>
               </section>
               <section class="itemID-selection spacing">
                 <label for="itemID">Item ID:</label>
-                <input type="text" id="edit_itemID" name="itemID">
+                <select name="itemID" id="edit_itemID">
+                  <option value="">Select Item</option>
+                </select>
               </section>
               <section class="date-selection spacing">
                 <label for="date">Date:</label>
@@ -159,6 +162,7 @@
                 <input type="number" step="0.01" name="totalPrice" id="edit_totalPrice" min=0>
               </section>
 					</div>
+          <!-- Buttons in modal -->
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-info" value="Save" id="edit_button">

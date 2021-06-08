@@ -2,9 +2,9 @@ var table = document.getElementById('myTable');
 let btn = document.getElementById("submit_button");
 let del = document.getElementById("delete_button");
 let edit = document.getElementById("edit_button");
-let server = 'http://localhost:9022/select/cooks';
-let putServer = 'http://localhost:9022/cooks';
-let deleteServer = 'http://localhost:9022/delete/cooks/';
+let server = 'http://flip3.engr.oregonstate.edu:9025/select/cooks';
+let putServer = 'http://flip3.engr.oregonstate.edu:9025/cooks';
+let deleteServer = 'http://flip3.engr.oregonstate.edu:9025/delete/cooks/';
 
 // populate the table 
 document.addEventListener('DOMContentLoaded', () => {
